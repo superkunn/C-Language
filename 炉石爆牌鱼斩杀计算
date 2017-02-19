@@ -1,0 +1,118 @@
+#include <stdio.h>
+
+int main()
+{
+    printf("请输入敌方血量:\n");//输入敌我方血量和剩卡数
+    int difangxue;
+    scanf("%d",&difangxue);
+    printf("请输入自己血量:\n");
+    int zijixue;
+    scanf("%d",&zijixue);
+
+    printf("请输入敌方剩余卡数:\n");
+    int difangsheng;
+    scanf("%d",&difangsheng);
+    printf("请输入自己卡数:\n");
+    int zijisheng;
+    scanf("%d",&zijisheng);
+    getchar();
+
+    char pai;
+    int d1=1;
+    int ci=0;
+
+    while((pai=getchar())!=EOF)//t是铜须d是大哥0结束，模拟抽牌过程计算抽牌数
+    {
+        if(pai=='0')
+        {
+            break;
+        }
+        else
+        {
+            if(pai=='t')
+            {
+                d1+=1;
+            }
+            else if(pai=='d')
+            {
+                ci+=d1;
+            }
+        }
+    }
+
+
+
+    int z=0,d=0;
+    while(ci--)
+    {
+        if(zijisheng>0)//自己扣血
+        {
+            zijisheng--;
+        }
+        else
+        {
+            zijixue-=(++z);
+        }
+        if(zijisheng>0)
+        {
+            zijisheng--;
+        }
+        else
+        {
+            zijixue-=(++z);
+        }
+
+        if(difangsheng>0)//敌方扣血
+        {
+            difangsheng--;
+        }
+        else
+        {
+            difangxue-=(++d);
+        }
+        if(difangsheng>0)
+        {
+            difangsheng--;
+        }
+        else
+        {
+            difangxue-=(++d);
+        }
+
+        if(zijixue<=0&&difangxue<=0)
+        {
+            printf("同归于尽！");
+            break;
+        }
+        else if(zijixue<=0&&difangxue>0)
+        {
+            printf("想自杀？");printf("%d %d",zijixue,difangxue);
+            break;
+        }
+        else if(zijixue>0&&difangxue<=0)
+        {
+            printf("完美斩杀！");
+            break;
+        }
+        else if(ci==0)
+        {
+            difangxue-=(++d);
+            if(difangxue<=0)
+            {
+                printf("回合结束后潇洒斩杀。");
+            }
+            else
+            {
+                printf("并没有什么卵用==");
+            }
+        }
+
+
+
+    }
+
+
+
+
+    return 0;
+}
